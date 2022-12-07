@@ -26,9 +26,9 @@ class Pet(Base):
 
     id = Column(Integer, primary_key=True)
     nome_pet = Column(String(100), nullable=False)
-    idade = Column(Integer, nullable=False)
-    peso = Column(Integer, nullable=False)
-    tutor_id = Column(Integer, ForeignKey('tutores.id'))
+    idade = Column(Integer, nullable=True)
+    peso = Column(Integer, nullable=True)
+    tutor_id = Column(Integer, ForeignKey('tutores.id'), nullable=False)
     tutor = relationship('Tutores')
 
 
