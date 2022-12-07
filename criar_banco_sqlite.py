@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
-
+from sqlalchemy.orm import relationship
 
 # Estamos criando uma instância de Engine com o sqlite
 engine = create_engine("sqlite:///petshop.db")
@@ -18,6 +18,18 @@ class Tutor(Base):
     nome = Column(String(100), nullable=False)
     endereco = Column(String, nullable=False)
     telefone = Column(String(16), nullable=False)
+    pets = relationship('Pets', backref='tutores')
+
+
+class Pet(Base):
+    __tablename__ = 'pets'
+
+    id = Column(Integer, primary_key=True)
+    nome_pet = Column(String(100), nullable=False)
+    idade = Column(Integer, nullable=False)
+    peso = Column(Integer, nullable=False)
+    tutor_id = Column(Integer, ForeignKey('tutores.id'))
+    tutor = relationship('Tutores')
 
 
 # Podemos agora gerar toda a estrutura do banco usando um método
