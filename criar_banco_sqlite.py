@@ -20,8 +20,6 @@ class Tutor(Base):
     telefone = Column(String(16), nullable=False)
 
 
-
-
 # Podemos agora gerar toda a estrutura do banco usando um método
 # utilitário da classe Base que criamos.
 Base.metadata.create_all(engine)

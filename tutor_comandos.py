@@ -5,7 +5,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-class ComandosTutor:
+class RepositorioTutor:
 
     def selecionar(self):
         data = session.query(Tutor).all()  # esse "db" tá pegando tudo que tem "self"
@@ -19,6 +19,7 @@ class ComandosTutor:
         data_isert = Tutor(nome=nome, endereco=endereco, telefone=telefone)
         session.add(data_isert)
         session.commit()
+        return data_isert
 
     def deletar(self, id):
         session.query(Tutor).filter(Tutor.id == id).delete()
@@ -27,13 +28,4 @@ class ComandosTutor:
     def atualizar(self, id, endereco, telefone):
         session.query(Tutor).filter(Tutor.id == id).update({'endereco': endereco, 'telefone': telefone})
         session.commit()
-
-
-# tutor = ComandosTutor().adicionar('thiago', 'rua castelo branco', '(85) 9 9990-5675')
-# tutor = ComandosTutor().deletar(3)
-
-tutor = ComandosTutor().selecionar()
-print(tutor)
-
-
-
+        return RepositorioTutor().selecionar_especifico(id)
