@@ -5,7 +5,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-class RepositorioTutor:
+class RepositorioPet:
 
     def selecionar(self):
         data = session.query(Pet).all()
@@ -28,7 +28,7 @@ class RepositorioTutor:
     def atualizar(self, id, idade, peso):
         session.query(Pet).filter(Pet.id == id).update({'idade': idade, 'peso': peso})
         session.commit()
-        return RepositorioTutor().selecionar_especifico(id)
+        return RepositorioPet().selecionar_especifico(id)
 
 
 # NOTA: Por enquanto o PET vai usar um valor de idade fixo, realizar uma mudaça posteriormente

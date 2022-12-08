@@ -5,7 +5,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-class RepositorioPet:
+class RepositorioTutor:
 
     def selecionar(self):
         data = session.query(Tutor).all()  # esse "db" tá pegando tudo que tem "self"

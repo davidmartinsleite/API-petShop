@@ -1,4 +1,4 @@
-from reposito_tutor import RepositorioTutor
+from reposito_pet import RepositorioTutor
 
 
 # RepositorioTutor().adicionar('Afonso', 'rua lorenzo melo', '(85) 9 3366-1122')
