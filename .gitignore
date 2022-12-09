@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+petshop.db
 .idea/
 venv/
 build/
