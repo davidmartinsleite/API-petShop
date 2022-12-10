@@ -1,6 +1,6 @@
-from criar_banco_sqlite import Tutor, Pet
-from repositorio_tutor import RepositorioTutor
-from reposito_pet import RepositorioPet
+from src.entidades import Tutor, Pet
+from src.repositorio_tutor import RepositorioTutor
+from src.reposito_pet import RepositorioPet
 
 
 # isso são instancias do repositorio
@@ -21,7 +21,7 @@ repo_tutor = RepositorioTutor()
 # tutor = Tutor(nome='nome', endereco='endereço', telefone='(99) 9 9999-9999')
 # repo_tutor.adicionar(tutor)
 
-pet = Pet(nome_pet='nome_pet', idade=5, peso=23, tutor_id=4)
+pet = Pet(nome_pet="nome_pet", idade=5, peso=23, tutor_id=4)
 repo_pet.adicionar(pet)
 
 dado = repo_pet.selecionar()
