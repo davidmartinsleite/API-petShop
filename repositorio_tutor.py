@@ -1,3 +1,5 @@
+import copy
+
 from sqlalchemy.orm import sessionmaker
 from criar_banco_sqlite import Tutor, engine
 
@@ -15,11 +17,10 @@ class RepositorioTutor:
         data = session.query(Tutor).filter(Tutor.id == id)
         return data
 
-    def adicionar(self, nome, endereco, telefone):
-        data_isert = Tutor(nome=nome, endereco=endereco, telefone=telefone)
-        session.add(data_isert)
+    def adicionar(self, tutor: Tutor):
+        session.add(tutor)
         session.commit()
-        return data_isert
+        return copy.deepcopy(tutor)
 
     def deletar(self, id):
         session.query(Tutor).filter(Tutor.id == id).delete()

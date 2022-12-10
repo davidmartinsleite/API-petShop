@@ -11,14 +11,14 @@ Base = declarative_base()
 
 
 # Cada um destes atributos será uma coluna na tabela gerada
-class Tutor(Base):
+class Tutor(Base):  # modelo de dados
     __tablename__ = 'tutores'
 
     id = Column(Integer, primary_key=True)
     nome = Column(String(100), nullable=False)
     endereco = Column(String, nullable=False)
     telefone = Column(String(16), nullable=False)
-    pets = relationship('Pets', backref='tutores')
+    pet = relationship('Pet', backref='pets')
 
 
 class Pet(Base):
@@ -28,10 +28,10 @@ class Pet(Base):
     nome_pet = Column(String(100), nullable=False)
     idade = Column(Integer, nullable=True)
     peso = Column(Integer, nullable=True)
-    tutor_id = Column(Integer, ForeignKey('tutores.id'), nullable=False)
-    tutor = relationship('Tutores')
+    tutor_id = Column(Integer, ForeignKey('tutores.id'))
 
-
+    def __repr__(self):
+        return f'pet = {self.nome_pet} tutor id = {self.tutor_id}'
 # Podemos agora gerar toda a estrutura do banco usando um método
 # utilitário da classe Base que criamos.
 Base.metadata.create_all(engine)

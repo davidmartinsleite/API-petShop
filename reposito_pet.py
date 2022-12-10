@@ -1,3 +1,5 @@
+import copy
+
 from sqlalchemy.orm import sessionmaker
 from criar_banco_sqlite import Pet, engine
 
@@ -15,11 +17,10 @@ class RepositorioPet:
         data = session.query(Pet).filter(Pet.id == id)
         return data
 
-    def adicionar(self, nome_pet, idade, peso, tutor_id):
-        data_isert = Pet(nome_pet=nome_pet, idade=idade, peso=peso, tutor_id=tutor_id)
-        session.add(data_isert)
+    def adicionar(self, pet: Pet):
+        session.add(pet)
         session.commit()
-        return data_isert
+        return copy.deepcopy(pet)
 
     def deletar(self, id):
         session.query(Pet).filter(Pet.id == id).delete()
