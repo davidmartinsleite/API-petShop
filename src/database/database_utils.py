@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from src.entidades import Base
@@ -6,15 +7,15 @@ from src.entidades import Base
 CURRENT_DIR = os.getcwd()
 
 
-def build_engine():
-    url = f"sqlite:///{CURRENT_DIR}/petshop.db"
+def build_engine(url: Optional[str] = None):
+    url = url or f"sqlite:///{CURRENT_DIR}/petshop.db"
     print(url)
     engine = create_engine(url=url)
     return engine
 
 
-def create_session():
-    engine = build_engine()
+def create_session(engine=None):
+    engine = engine or build_engine()
     Session = sessionmaker(bind=engine)
     session = Session()
     return session
