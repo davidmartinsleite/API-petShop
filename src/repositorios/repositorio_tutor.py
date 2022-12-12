@@ -15,7 +15,7 @@ class RepositorioTutor:
         return data
 
     def selecionar_especifico(self, id):
-        data = self.session.query(Tutor).filter(Tutor.id == id)
+        data = self.session.query(Tutor).filter(Tutor.id == id).one()
         return data
 
     def adicionar(self, tutor: Tutor):
