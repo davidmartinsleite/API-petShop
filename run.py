@@ -1,7 +1,6 @@
 from src.entidades import Tutor, Pet
-from src.repositorio_tutor import RepositorioTutor
-from src.reposito_pet import RepositorioPet
-
+from src.repositorios.reposito_pet import RepositorioPet
+from src.repositorios.repositorio_tutor import RepositorioTutor
 
 # isso são instancias do repositorio
 repo_pet = RepositorioPet()

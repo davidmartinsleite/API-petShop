@@ -26,5 +26,5 @@ class Pet(Base):
     peso = Column(Integer, nullable=True)
     tutor_id = Column(Integer, ForeignKey("tutores.id"))
 
-    def __repr__(self):
-        return f"pet = {self.nome_pet} tutor id = {self.tutor_id}"
+    # def __repr__(self):
+    #     return f"pet = {self.nome_pet} tutor id = {self.tutor_id}"

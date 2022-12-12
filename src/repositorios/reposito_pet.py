@@ -1,25 +1,26 @@
 import copy
 
-from src.entidades import Pet
 from src.database.database_utils import create_session
+from src.entidades import Pet
 
 
 class RepositorioPet:
-    def __init__(self) -> None:
-        self.session = create_session()
+    def __init__(self, session=None) -> None:
+        self.session = session or create_session()
 
     def selecionar(self):
         data = self.session.query(Pet).all()
         return data
 
     def selecionar_especifico(self, id):
-        data = self.session.query(Pet).filter(Pet.id == id)
+        data = self.session.query(Pet).filter(Pet.id == id).one()
         return data
 
     def adicionar(self, pet: Pet):
         self.session.add(pet)
         self.session.commit()
-        return copy.deepcopy(pet)
+        return pet
+        # copy.deepcopy(pet)
 
     def deletar(self, id):
         self.session.query(Pet).filter(Pet.id == id).delete()
