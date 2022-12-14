@@ -2,12 +2,14 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.vscode 
 
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
+petshop.db
 .idea/
 venv/
 build/
