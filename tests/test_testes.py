@@ -62,7 +62,7 @@ class TestRepositorioTutor:
     def test_atualizar_tutor(self, repo_tutor, session):
         tutor = Tutor(nome="nome1", endereco="endereço 1", telefone="(11) 1 1111-1111")
         tutor_adicionado_original = repo_tutor.adicionar(tutor)
-        tutor_adicionado_atualizado = repo_tutor.atualizar(1, 'endereço novo', '(88) 8 8888-8888')
+        tutor_adicionado_atualizado = repo_tutor.atualizar(1, nome="novo nome", endereco='endereço novo', telefone='(88) 8 8888-8888')
         assert tutor_adicionado_original != tutor_adicionado_atualizado
 
     def test_adicionar_pet(self, repo_pet, session):
@@ -100,5 +100,5 @@ class TestRepositorioTutor:
     def test_atualizar_pet(self, repo_pet, session):
         pet = Pet(nome_pet="nome_pet1", idade=1, peso=11, tutor_id=1)
         pet_adicionado_original = repo_pet.adicionar(pet)
-        pet_adicionado_atualizado = repo_pet.atualizar(1, 2, 22)
+        pet_adicionado_atualizado = repo_pet.atualizar(1, nome_pet="novo nome_pet1", idade=2, peso=22, tutor_id=2)
         assert pet_adicionado_original != pet_adicionado_atualizado

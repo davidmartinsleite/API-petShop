@@ -27,9 +27,9 @@ class RepositorioTutor:
         self.session.query(Tutor).filter(Tutor.id == id).delete()
         self.session.commit()
 
-    def atualizar(self, id, endereco, telefone):
+    def atualizar(self, id, nome, endereco, telefone):
         self.session.query(Tutor).filter(Tutor.id == id).update(
-            {"endereco": endereco, "telefone": telefone}
+            {"nome": nome, "endereco": endereco, "telefone": telefone}
         )
         self.session.commit()
         return RepositorioTutor().selecionar_especifico(id)

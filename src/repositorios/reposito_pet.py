@@ -26,9 +26,9 @@ class RepositorioPet:
         self.session.query(Pet).filter(Pet.id == id).delete()
         self.session.commit()
 
-    def atualizar(self, id, idade, peso):
+    def atualizar(self, id, nome_pet, idade, peso, tutor_id):
         self.session.query(Pet).filter(Pet.id == id).update(
-            {"idade": idade, "peso": peso}
+            {"nome_pet": nome_pet, "idade": idade, "peso": peso, "tutor_id": tutor_id}
         )
         self.session.commit()
         return RepositorioPet().selecionar_especifico(id)
