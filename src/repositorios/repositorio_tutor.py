@@ -21,7 +21,8 @@ class RepositorioTutor:
     def adicionar(self, tutor: Tutor):
         self.session.add(tutor)
         self.session.commit()
-        return tutor
+        tutor_adicionado = self.selecionar_especifico(tutor.id)
+        return tutor_adicionado
 
     def deletar(self, id):
         self.session.query(Tutor).filter(Tutor.id == id).delete()
@@ -33,6 +34,3 @@ class RepositorioTutor:
         )
         self.session.commit()
         return RepositorioTutor().selecionar_especifico(id)
-
-    def teste_de_saida(self):
-        return 'texto qualquer'

@@ -22,6 +22,6 @@ repo_tutor = RepositorioTutor()
 
 pet = Pet(nome_pet="nome_pet", idade=5, peso=23, tutor_id=4)
 repo_pet.adicionar(pet)
-
-dado = repo_pet.selecionar()
-print(dado)
+#
+# dado = repo_pet.selecionar()
+# print(dado)

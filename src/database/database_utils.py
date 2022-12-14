@@ -26,6 +26,9 @@ def create_database():
     Base.metadata.create_all(engine)
 
 
+if __name__ == "__main__":
+    create_database()
+
 # Estamos criando uma instância de Engine com o sqlite
 # Podemos agora gerar toda a estrutura do banco usando um método
 # utilitário da classe Base que criamos.
