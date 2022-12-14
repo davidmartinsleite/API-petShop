@@ -33,3 +33,6 @@ class RepositorioTutor:
         )
         self.session.commit()
         return RepositorioTutor().selecionar_especifico(id)
+
+    def teste_de_saida(self):
+        return 'texto qualquer'
