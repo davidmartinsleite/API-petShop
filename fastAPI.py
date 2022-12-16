@@ -1,6 +1,8 @@
 from fastapi import FastAPI
-from src.entidades import Tutor
+from src.entidades import Tutor, Pet
 from src.repositorios.repositorio_tutor import RepositorioTutor
+from src.repositorios.reposito_pet import RepositorioPet
+
 
 app = FastAPI()
 # uvicorn fastAPI:app --reload
@@ -31,6 +33,6 @@ def deletar_tutor(id: int):
 
 @app.patch('/tutores/atualizar')
 def atualizar_tutor(id: int, nome: str, endereco: str, telefone: str):
-    tutor = Tutor(id=id, nome=nome, endereco=endereco, telefone=telefone)
-    tutor_atualizado = RepositorioTutor().atualizar(tutor)
+    tutor_atualizado = RepositorioTutor().atualizar(id=id, nome=nome, endereco=endereco, telefone=telefone)
     return tutor_atualizado
+
