@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from src.entidades import Tutor, Pet
 from src.repositorios.repositorio_tutor import RepositorioTutor
-from src.repositorios.reposito_pet import RepositorioPet
+from src.repositorios.repositorio_pet import RepositorioPet
 
 
 app = FastAPI()
