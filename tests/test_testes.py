@@ -1,6 +1,6 @@
 import pytest
 
-from src.repositorios.reposito_pet import RepositorioPet
+from src.repositorios.repositorio_pet import RepositorioPet
 from src.repositorios.repositorio_tutor import RepositorioTutor
 from src.entidades import Tutor, Pet
 from src.database.database_utils import create_session, build_engine
