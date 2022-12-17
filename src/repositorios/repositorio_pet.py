@@ -21,7 +21,6 @@ class RepositorioPet:
         self.session.commit()
         pet_adicionado = self.selecionar_especifico(pet.id)
         return pet_adicionado
-        # copy.deepcopy(pet)
 
     def deletar(self, id):
         self.session.query(Pet).filter(Pet.id == id).delete()
