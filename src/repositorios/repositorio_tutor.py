@@ -1,5 +1,3 @@
-import copy
-
 from src.database.database_utils import create_session
 from src.entidades import Tutor
 
@@ -33,4 +31,4 @@ class RepositorioTutor:
             {"nome": nome, "endereco": endereco, "telefone": telefone}
         )
         self.session.commit()
-        return RepositorioTutor().selecionar_especifico(id)
+        return self.selecionar_especifico(id)
