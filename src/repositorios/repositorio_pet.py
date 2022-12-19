@@ -31,7 +31,7 @@ class RepositorioPet:
             {"nome_pet": nome_pet, "idade": idade, "peso": peso, "tutor_id": tutor_id}
         )
         self.session.commit()
-        return RepositorioPet().selecionar_especifico(id)
+        return self.selecionar_especifico(id)
 
 
 # NOTA: Por enquanto o PET vai usar um valor de idade fixo, realizar uma mudaça posteriormente
