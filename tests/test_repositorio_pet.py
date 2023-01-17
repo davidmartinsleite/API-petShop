@@ -1,12 +1,12 @@
 import copy
 import pytest
 from src.repositorios.repositorio_pet import RepositorioPet
-from src.entidades import Tutor, Pet
+from src.entidades import Pet
 from src.database.database_utils import create_session, build_engine
 from src.entidades import Base
 
 
-class TestRepositorioTutor:
+class TestRepositorioPet:  # muda isso aqui
     @pytest.fixture
     def engine(self):
         return build_engine("sqlite://")
