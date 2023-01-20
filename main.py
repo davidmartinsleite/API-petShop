@@ -5,10 +5,15 @@ from src.repositorios.repositorio_pet import RepositorioPet
 
 
 app = FastAPI()
-# uvicorn fastAPI:app --reload
+# uvicorn main:app --reload
 
 repositorio_potutor = RepositorioTutor()
 repositorio_pet = RepositorioPet()
+
+
+@app.get("/")
+def ler_raiz():
+    return {"msg": "API Petshop"}
 
 
 @app.get('/tutores/seleciona')  # criar um endpoint para verificar todos os objetos criados

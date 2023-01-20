@@ -7,9 +7,7 @@ class RepositorioTutor:
         self.session = session or create_session()
 
     def selecionar(self):
-        data = self.session.query(
-            Tutor
-        ).all()  # esse "db" tá pegando tudo que tem "self"
+        data = self.session.query(Tutor).all()
         return data
 
     def selecionar_especifico(self, id):
