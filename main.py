@@ -27,8 +27,10 @@ def pega_tutor_especifico(id: int):
 
 
 @app.post('/tutores/adcionar')
-def adiona_novo_tutor(nome: str, endereco: str, telefone: str):
+def adiona_novo_tutor(nome: str, endereco: str, telefone: str, id: int | None = None):
     tutor = Tutor(nome=nome, endereco=endereco, telefone=telefone)
+    if id:
+        tutor.update({'id': id})
     tutor_adicionado = repositorio_tutor.adicionar(tutor)
     return tutor_adicionado
 

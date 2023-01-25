@@ -9,23 +9,16 @@ from src.repositorios.repositorio_tutor import RepositorioTutor
 from src.entidades import Base, Tutor
 from main import app
 
-"""
-1. quando apertar o botao esquerdo, deve acender a luz verde
-2. quando apertar o botao direito, deve acender a luz vermelha
-3. quando apertar os dois botoes ao mesmo tempo e segurar, deve piscar as duas luzes
-4. quando apertar os dois botoes ao mesmo tempo, rapidamente, nada deve acontecer
-5. quando apertar os dois botoes de forma intermitente, entre esquerdo e direito, nada deve acontecer.
-6. quando apertar os dois botoes, ao mesmo tempo, de forma rapida e intermitente, nada deve acontecer. 
-"""
-
-"""
-# PARA CADA TESTE
-1. Faço o setup do ambiente: subir infra estrutura necessaria
-2. Criar objetos auxiliares o que eu preciso para testar algo
-3. Realizar o teste
-4. Limpar os objetos auxiliares e infraestrutura
-"""
 client = TestClient(app)
+
+
+def criando_tutor():
+    return {
+        "id": 1,
+        "nome": "nome",
+        "endereco": "endereço",
+        "telefone": "9933556677",
+    }
 
 
 class TestAPI:
@@ -67,31 +60,28 @@ class TestAPI:
         assert resposta.status_code == 200
         assert resposta.json() == {"msg": "API Petshop"}
 
-    def teste_adicionar_tutor_pela_api(self, repo_tutor: RepositorioTutor):
-        tutor = Tutor(nome="nome(teste_tutor)", endereco="endereço", telefone="(99) 9 9999-9999")
+    def test_criar_novo_tutor(self, repo_tutor: RepositorioTutor, session):
+        session.query(Tutor).delete()
+        session.commit()
+        tutor_data = {'nome': 'nome1(teste_tutor)', 'endereco': 'endereco', 'telefone': '(99) 9 9999-9999'}
+        resposta = client.post("/tutores/adcionar?nome={}&endereco={}&telefone={}".format(tutor_data['nome'], tutor_data['endereco'], tutor_data['telefone']))
+        assert resposta.status_code == 200, f'Error: {resposta.json()}'
+        session.query(Tutor).delete()
+        session.commit()
+        # session.close()
+
+    def teste_obtem_todos_os_tutores_pela_api(self, repo_tutor: RepositorioTutor, session):
+        session.query(Tutor).delete()
+        session.commit()
+        tutor = Tutor(nome="nome1(teste_tutor)", endereco="endereço", telefone="(99) 9 9999-9999")
+        repo_tutor.adicionar(tutor)
+        tutor = Tutor(nome="nome2(teste_tutor)", endereco="endereço", telefone="(99) 9 9999-9999")
         repo_tutor.adicionar(tutor)
         resposta = client.get("/tutores/seleciona")
         conteudo = resposta.json()
         assert resposta.status_code == 200
+        assert len(conteudo) == 2
+        session.query(Tutor).delete()
+        session.commit()
 
-    #
-    # def test_ver_todos_os_tutores(self, repo_tutor: RepositorioTutor):
-    #
-    #     tutor1 = Tutor(nome="nome1", endereco="endereço1", telefone="(99) 9 9999-9999")
-    #     tutor2 = Tutor(nome="nome2", endereco="endereço2", telefone="(99) 9 9999-8888")
-    #     repo_tutor.adicionar(tutor1)
-    #     repo_tutor.adicionar(tutor2)
-    #
-    #     resposta = client.get("/tutores/seleciona")
-    #     conteudo = resposta.json()
-    #     assert resposta.status_code == 200
-    #     assert len(conteudo) == 2
-    #
-    # def test_criar_novo_tutor(self):
-    #     resposta = client.post(
-    #         "/tutores/adcionar",
-    #         json={"nome": "Joao", "endereco": "Rua 2", "telefone": "88 9 9933-1122"},
-    #         # json={"nome": "nome"},
-    #     )
-    #
-    #     # assert resposta.status_code == 200
+

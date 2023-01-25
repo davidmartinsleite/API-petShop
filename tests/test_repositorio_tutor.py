@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 from fastapi.testclient import TestClient
 import pytest
 import copy
+from sqlalchemy.engine import Engine
 from src.database.database_utils import get_database_uri
 from src.repositorios.repositorio_tutor import RepositorioTutor
 from src.entidades import Base, Tutor
@@ -10,7 +11,6 @@ from src.database.database_utils import create_session, build_engine
 from main import app
 
 client = TestClient(app)
-from sqlalchemy.engine import Engine
 
 
 class TestRepositorioPet:
