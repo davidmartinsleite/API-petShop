@@ -12,13 +12,11 @@ from main import app
 client = TestClient(app)
 
 
-def criando_tutor():
-    return {
-        "id": 1,
-        "nome": "nome",
-        "endereco": "endereço",
-        "telefone": "9933556677",
-    }
+tutor01 = {
+    'nome': "nome",
+    'endereco': "endereço",
+    'telefone': "9933556677"
+}
 
 
 class TestAPI:
@@ -60,15 +58,11 @@ class TestAPI:
         assert resposta.status_code == 200
         assert resposta.json() == {"msg": "API Petshop"}
 
-    def test_criar_novo_tutor(self, repo_tutor: RepositorioTutor, session):
+    def test_criar_novo_tutor(self, session):
         session.query(Tutor).delete()
         session.commit()
-        tutor_data = {'nome': 'nome1(teste_tutor)', 'endereco': 'endereco', 'telefone': '(99) 9 9999-9999'}
-        resposta = client.post("/tutores/adcionar?nome={}&endereco={}&telefone={}".format(tutor_data['nome'], tutor_data['endereco'], tutor_data['telefone']))
-        assert resposta.status_code == 200, f'Error: {resposta.json()}'
-        session.query(Tutor).delete()
-        session.commit()
-        # session.close()
+        resposta = client.post("/tutores/adcionar/", json=tutor01)
+        assert resposta.status_code == 200
 
     def teste_obtem_todos_os_tutores_pela_api(self, repo_tutor: RepositorioTutor, session):
         session.query(Tutor).delete()
@@ -77,11 +71,8 @@ class TestAPI:
         repo_tutor.adicionar(tutor)
         tutor = Tutor(nome="nome2(teste_tutor)", endereco="endereço", telefone="(99) 9 9999-9999")
         repo_tutor.adicionar(tutor)
-        resposta = client.get("/tutores/seleciona")
+        session.commit()
+        resposta = client.get("/tutores/seleciona/")
         conteudo = resposta.json()
         assert resposta.status_code == 200
         assert len(conteudo) == 2
-        session.query(Tutor).delete()
-        session.commit()
-
-
