@@ -1,46 +1,60 @@
 from fastapi import FastAPI
+from fastapi.openapi.models import Response
+
 from src.entidades import Tutor, Pet
 from src.repositorios.repositorio_tutor import RepositorioTutor
 from src.repositorios.repositorio_pet import RepositorioPet
 
 
 app = FastAPI()
-# uvicorn fastAPI:app --reload
+# uvicorn main:app --reload
 
-repositorio_potutor = RepositorioTutor()
+repositorio_tutor = RepositorioTutor()
 repositorio_pet = RepositorioPet()
 
 
-@app.get('/tutores/seleciona')  # criar um endpoint para verificar todos os objetos criados
+@app.get("/")
+def ler_raiz():
+    return {"msg": "API Petshop"}
+
+
+@app.get('/tutores/seleciona/')  # criar um endpoint para verificar todos os objetos criados
 def pega_todos_os_tutores():
-    return repositorio_potutor.selecionar()
+    return repositorio_tutor.selecionar()
 
 
 @app.get('/tutores/seleciona/{id}')
 def pega_tutor_especifico(id: int):
-    return repositorio_potutor.selecionar_especifico(id)
+    return repositorio_tutor.selecionar_especifico(id)
 
 
-@app.post('/tutores/adcionar')
-def adiona_novo_tutor(nome: str, endereco: str, telefone: str):
-    tutor = Tutor(nome=nome, endereco=endereco, telefone=telefone)
-    tutor_adicionado = repositorio_potutor.adicionar(tutor)
+@app.post('/tutores/adcionar/')
+def adiona_novo_tutor(corpo_requisicao: dict):
+    tutor = Tutor(nome=corpo_requisicao['nome'], endereco=corpo_requisicao['endereco'], telefone=corpo_requisicao['telefone'])
+    tutor_adicionado = repositorio_tutor.adicionar(tutor)
     return tutor_adicionado
+    # EXEMPLO DE Request body
+    # {
+    #     "id": 0,
+    #     "nome": "joao",
+    #     "endereco": "rua",
+    #     "telefone": "11223344"
+    # }
 
 
 @app.delete('/tutores/deletar/{id}')
 def deletar_tutor(id: int):
-    confirmacao = repositorio_potutor.deletar(id)
+    confirmacao = repositorio_tutor.deletar(id)
     return confirmacao
 
 
-@app.patch('/tutores/atualizar')
+@app.patch('/tutores/atualizar/')
 def atualizar_tutor(id: int, nome: str, endereco: str, telefone: str):
-    tutor_atualizado = repositorio_potutor.atualizar(id=id, nome=nome, endereco=endereco, telefone=telefone)
+    tutor_atualizado = repositorio_tutor.atualizar(id=id, nome=nome, endereco=endereco, telefone=telefone)
     return tutor_atualizado
 
 
-@app.get('/pets/seleciona')  # criar um endpoint para verificar todos os objetos criados
+@app.get('/pets/seleciona/')  # criar um endpoint para verificar todos os objetos criados
 def pega_todos_os_pets():
     return repositorio_pet.selecionar()
 
@@ -50,7 +64,7 @@ def pega_pet_especifico(id: int):
     return repositorio_pet.selecionar_especifico(id)
 
 
-@app.post('/pets/adcionar')
+@app.post('/pets/adcionar/')
 def adiona_novo_pet(nome_pet: str, idade: int, peso: float, tutor_id: int):
     pet = Pet(nome_pet=nome_pet, idade=idade, peso=peso, tutor_id=tutor_id)
     pet_adicionado = repositorio_pet.adicionar(pet)
@@ -63,7 +77,7 @@ def deletar_pet(id: int):
     return confirmacao
 
 
-@app.patch('/pets/atualizar')
+@app.patch('/pets/atualizar/')
 def atualizar_pet(id: int, nome_pet: str, idade: int, peso: float, tutor_id: int):
     pet_atualizado = repositorio_pet.atualizar(id=id, nome_pet=nome_pet, idade=idade, peso=peso, tutor_id=tutor_id)
     return pet_atualizado
