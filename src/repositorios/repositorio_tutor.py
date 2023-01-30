@@ -17,8 +17,8 @@ class RepositorioTutor:
     def adicionar(self, tutor: Tutor):
         self.session.add(tutor)
         self.session.commit()
-        tutor_adicionado = self.selecionar_especifico(tutor.id)
-        return tutor_adicionado
+        # tutor_adicionado = self.selecionar_especifico(tutor.id)
+        return tutor
 
     def deletar(self, id):
         self.session.query(Tutor).filter(Tutor.id == id).delete()

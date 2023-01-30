@@ -19,8 +19,8 @@ class RepositorioPet:
     def adicionar(self, pet: Pet):
         self.session.add(pet)
         self.session.commit()
-        pet_adicionado = self.selecionar_especifico(pet.id)
-        return pet_adicionado
+        # pet_adicionado = self.selecionar_especifico(pet.id)
+        return pet
 
     def deletar(self, id):
         self.session.query(Pet).filter(Pet.id == id).delete()
